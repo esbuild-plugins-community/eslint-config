@@ -13,7 +13,7 @@ const prettierRules = require('./prettierRules');
 const rulesConfig = {
   yoda: 'error',
   radix: 'error',
-  strict: 'error',
+  strict: 'off',
   'no-new': 'error',
   'no-var': 'error',
   'no-eval': 'error',

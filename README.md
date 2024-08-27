@@ -6,7 +6,7 @@
 ### Usage
 
 1. Add `@espcom/eslint-config` to `devDependencies` in package.json
-2. Create `.formatignore` and `.eslintrc.js` with content:
+2. Create `eslint.config.cjs` with content:
 ```javascript
 const path = require('path');
 
@@ -22,8 +22,8 @@ module.exports = eslintConfig;
 ```json
 {
   "scripts": {
-    "analyze:js": "eslint --ignore-path ./.formatignore --ext \".js,.ts\" ./",
-    "format:js": "eslint --ignore-path ./.formatignore --ext \".js,.ts\" --fix"
+    "analyze:js": "eslint ./src",
+    "format:js": "eslint --fix"
   }
 }
 ```
