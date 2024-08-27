@@ -25,7 +25,7 @@ const rulesConfig = {
   '@typescript-eslint/adjacent-overload-signatures': 'error',
   '@typescript-eslint/prefer-string-starts-ends-with': 'error',
 
-  '@typescript-eslint/ban-types': ['error', { types: { '{}': false } }],
+  // '@typescript-eslint/ban-types': ['error', { types: { '{}': false } }],
   '@typescript-eslint/array-type': ['error', { default: 'generic' }],
   '@typescript-eslint/no-magic-numbers': [
     'error',

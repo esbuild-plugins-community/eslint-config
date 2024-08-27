@@ -5,6 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@eslint/compat':
+    specifier: 1.1.1
+    version: 1.1.1
+  '@eslint/eslintrc':
+    specifier: 3.1.0
+    version: 3.1.0
+  '@eslint/js':
+    specifier: 9.9.1
+    version: 9.9.1
   '@types/eslint':
     specifier: 9.6.1
     version: 9.6.1
@@ -35,6 +44,9 @@ dependencies:
   eslint-plugin-prettier:
     specifier: 5.2.1
     version: 5.2.1(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0)(eslint@9.9.1)(prettier@3.3.3)
+  globals:
+    specifier: 15.9.0
+    version: 15.9.0
   prettier:
     specifier: 3.3.3
     version: 3.3.3
@@ -70,6 +82,11 @@ packages:
   /@eslint-community/regexpp@4.11.0:
     resolution: {integrity: sha512-G/M/tIiMrTAxEWRfLfQJMmGNX28IxBg4PBz8XqQhqUHLFI6TL2htpIB1iQCj144V5ee/JaKyT9/WZ0MGZWfA7A==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
+    dev: false
+
+  /@eslint/compat@1.1.1:
+    resolution: {integrity: sha512-lpHyRyplhGPL5mGEh6M9O5nnKk0Gz4bFI+Zu6tKlPpDUN7XshWvH9C/px4UVm87IAANE0W81CEsNGbS1KlzXpA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     dev: false
 
   /@eslint/config-array@0.18.0:
@@ -1325,6 +1342,11 @@ packages:
 
   /globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+    dev: false
+
+  /globals@15.9.0:
+    resolution: {integrity: sha512-SmSKyLLKFbSr6rptvP8izbyxJL4ILwqO9Jg23UA0sDlGlu58V59D1//I3vlc0KJphVdUR7vMjHIplYnzBxorQA==}
     engines: {node: '>=18'}
     dev: false
 

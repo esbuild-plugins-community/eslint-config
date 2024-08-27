@@ -1,43 +1,77 @@
-/**
- * @docs: https://eslint.org/docs/user-guide/configuring/language-options
- * @type {import("eslint").Linter.BaseConfig }
- *
- */
-
 const path = require('path');
+const prettier = require('eslint-plugin-prettier');
+const _import = require('eslint-plugin-import');
+const typescriptEslint = require('@typescript-eslint/eslint-plugin');
+const { fixupPluginRules } = require('@eslint/compat');
+const globals = require('globals');
+const tsParser = require('@typescript-eslint/parser');
+const js = require('@eslint/js');
+const { FlatCompat } = require('@eslint/eslintrc');
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
 
 function getConfig(options) {
-  const config = {
-    env: { node: true, browser: true },
-    parser: '@typescript-eslint/parser',
-    extends: [path.resolve(__dirname, './rules.js'), 'prettier'],
-    plugins: ['prettier', 'import', '@typescript-eslint'],
-    settings: {
-      'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
-      'import/resolver': options.tsConfigPath
-        ? {
-            typescript: {
-              alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
-              project: options.tsConfigPath,
-            },
-          }
-        : undefined,
-    },
-    parserOptions: { sourceType: 'module', ecmaVersion: 6 },
+  return [
+    ...compat.extends(
+      path.resolve(__dirname, './rules.js'),
+      'prettier'
+    ),
+    {
+      plugins: {
+        prettier,
+        import: fixupPluginRules(_import),
+        '@typescript-eslint': typescriptEslint,
+      },
 
-    // For TS files some other rules added
-    overrides: options.tsConfigPath
-      ? [
-          {
-            files: ['*.ts', '*.tsx'],
-            extends: [path.resolve(__dirname, './rulesTs.js')],
-            parserOptions: { project: [options.tsConfigPath] },
+      languageOptions: {
+        globals: {
+          ...globals.node,
+          ...globals.browser,
+        },
+
+        parser: tsParser,
+        ecmaVersion: 6,
+        sourceType: 'module',
+      },
+
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+            project: options.tsConfigPath,
           },
-        ]
-      : undefined,
-  };
+        },
+      },
+    },
+    ...compat
+      .extends(
+        path.resolve(__dirname, './rulesTs.js')
+      )
+      .map((config) => ({
+        ...config,
+        files: ['**/*.ts', '**/*.tsx'],
+      })),
+    {
+      files: ['**/*.ts', '**/*.tsx'],
 
-  return config;
+      languageOptions: {
+        ecmaVersion: 5,
+        sourceType: 'script',
+
+        parserOptions: {
+          project: [options.tsConfigPath],
+        },
+      },
+    },
+  ];
 }
 
 module.exports = getConfig;

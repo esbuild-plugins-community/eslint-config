@@ -2,7 +2,7 @@
   "name": "@espcom/eslint-config",
   "author": "espcom",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Private ESLint config",
   "repository": {
     "type": "git",
@@ -26,7 +26,11 @@
     "eslint-plugin-prettier": "5.2.1",
     "prettier": "3.3.3",
     "prettier-eslint": "16.3.0",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "@eslint/compat": "1.1.1",
+    "globals": "15.9.0",
+    "@eslint/js": "9.9.1",
+    "@eslint/eslintrc": "3.1.0"
   },
   "engines": {
     "node": ">=18.0.0"
