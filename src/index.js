@@ -277,7 +277,7 @@ function getEslintConfig(options) {
           },
         },
       },
-      files: ['**/*.ts'],
+      files: ['**/*.ts', '**/*.js', '**/*.cjs', '**/*.mjs'],
     },
     eslintPluginPrettierRecommended,
   ];
