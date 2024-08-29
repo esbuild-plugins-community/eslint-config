@@ -2,7 +2,7 @@
   "name": "@espcom/eslint-config",
   "author": "espcom",
   "license": "MIT",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Private ESLint config",
   "repository": {
     "type": "git",

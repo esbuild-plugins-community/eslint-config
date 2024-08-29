@@ -138,16 +138,8 @@ function getEslintConfig(options) {
         'no-restricted-syntax': [
           'error',
           {
-            selector: 'FunctionDeclaration[async=true]',
-            message: 'Using async functions is restricted. Use Promise. ',
-          },
-          {
             selector: 'FunctionDeclaration[generator=true]',
             message: 'Using generator functions is restricted. Use Promise. ',
-          },
-          {
-            selector: 'AwaitExpression',
-            message: 'Using await construction is restricted. Use Promise. ',
           },
           {
             selector: 'YieldExpression',
