@@ -4,10 +4,41 @@ const typescriptEslint = require('@typescript-eslint/eslint-plugin');
 const { fixupPluginRules } = require('@eslint/compat');
 const globals = require('globals');
 const tsParser = require('@typescript-eslint/parser');
+const pluginExtensions = require('eslint-plugin-require-extensions');
+const pluginNodePrefix = require('eslint-plugin-require-node-import-prefix');
 
 function getEslintConfig(options) {
   return [
     {
+      files: ['**/*.ts', '**/*.js', '**/*.cjs', '**/*.mjs'],
+      plugins: {
+        import: fixupPluginRules(_import),
+        '@typescript-eslint': typescriptEslint,
+        'require-extensions': pluginExtensions,
+        'require-node-import-prefix': pluginNodePrefix,
+      },
+      languageOptions: {
+        globals: {
+          ...globals.node
+        },
+        parser: tsParser,
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          project: [options.tsConfigPath],
+        },
+      },
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts'],
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+            project: options.tsConfigPath,
+          },
+        },
+      },
       rules: {
         yoda: 'error',
         radix: 'error',
@@ -239,37 +270,10 @@ function getEslintConfig(options) {
             format: ['PascalCase'],
           },
         ],
+        'require-extensions/require-extensions': 'error',
+        'require-extensions/require-index': 'error',
+        'require-node-import-prefix/no-empty-import-prefix': 'error'
       },
-
-      plugins: {
-        import: fixupPluginRules(_import),
-        '@typescript-eslint': typescriptEslint,
-      },
-
-      languageOptions: {
-        globals: {
-          ...globals.node
-        },
-        parser: tsParser,
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parserOptions: {
-          project: [options.tsConfigPath],
-        },
-      },
-
-      settings: {
-        'import/parsers': {
-          '@typescript-eslint/parser': ['.ts'],
-        },
-        'import/resolver': {
-          typescript: {
-            alwaysTryTypes: true,
-            project: options.tsConfigPath,
-          },
-        },
-      },
-      files: ['**/*.ts', '**/*.js', '**/*.cjs', '**/*.mjs'],
     },
     eslintPluginPrettierRecommended,
   ];
